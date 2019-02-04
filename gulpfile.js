@@ -11,7 +11,6 @@ gulp.task('sass', function() {
         .pipe(sass())
         .on('error', function (err) {
             console.log(err.toString());
-
             this.emit('end');
         })
         .pipe(sourcemaps.write('.'))
