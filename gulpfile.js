@@ -1,28 +1,27 @@
 const gulp =        require('gulp'),
-      less =        require('gulp-less'),
+      sass =        require('gulp-sass'),
+      sourcemaps =  require('gulp-sourcemaps'),
       browserSync = require('browser-sync').create(),
       reload =      browserSync.reload;
  
+// Compile sass, map source, then reload  [[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]
+gulp.task('sass', function() {
+    gulp.src('./app/styles/sass/**/*.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .on('error', function (err) {
+            console.log(err.toString());
 
-// Compile .less ////////////////////////////
-gulp.task('less-to-css', function() {  
-    return gulp.src('./app/styles/less/*.less')
-        .pipe(less())
+            this.emit('end');
+        })
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./app/styles/'))
         .pipe(reload({
             stream: true
         }))
 });
 
-// Watch for .less changes /////////////////////////////
-gulp.task('watch-less', function() {  
-    // gulp.watch('./app/styles/less/*.less', ['less-to-css']);
-    gulp.watch('./app/styles/less/*.less').on('change', function() {
-        gulp.run('less-to-css');
-    });
-});
-
-// auto-sync file changes //////////////////////////////
+// Browsersync any file changes [[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]
 gulp.task('sync', function () {
  
     // Serve files from the root of this project
@@ -34,10 +33,11 @@ gulp.task('sync', function () {
         notify: false // removes the "Browsersync: connected" browser notification
     });
     
-    // Any changes will reload webpage
-    gulp.watch('./app/**/*.+(html|css|js|php)').on('change', reload);
+    // Watchers
+    gulp.watch('./app/**/*.+(html|js|php)', reload);
+    gulp.watch('./app/styles/sass/*.sass', ['sass']);
 
 });
- 
-/* Task when running `gulp` from terminal */
-gulp.task('default', ['watch-less', 'sync']);
+
+// Use `gulp` in command line   [[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]
+gulp.task('default', ['sass', 'sync']);
