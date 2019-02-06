@@ -1,4 +1,244 @@
+
+// Dev Environment *********************************************
+
+
+// tools ----------------------------------------------------
+.limn {
+    outline: 1px dotted rgb(248, 228, 174);
+}
+.container-fluid > .row,
+.container-fluid .col-,
+.container-fluid > .row .col- > .row {
+    @extend .limn;
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+  
+    @return $number;
+  }
+
+
+// mixins, placeholders, functions ---------------------------------
+
+@mixin vw($value) {
+    // $value * 1vw;
+}
+@mixin font-px-to-em($px) {
+    @if $px == 16 { font-size: 1em; }
+    @else if $px == 18 { font-size: 1.125em; }
+    @else if $px == 20 { font-size: 1.25em; }
+    @else if $px == 22 { font-size: 1.375em; }
+    @else if $px == 24 { font-size: 1.5em; }
+    @else { font-size: 0.5em;}
+}
+
+@function -app-right-width($left-width, $middle-width) {
+    @return 100vw - ($left-width + $middle-width);
+}
+
+%vertical-flexies {
+    /* --- flexbox --- */
+    flex-direction: column;
+    justify-content: space-evenly;
+    .row {
+        flex-grow: 1;
+        align-items: center;
+    }
+    // justify-content: space-between;
+    /* --- end flexbox --- */
+}
+
+
+// variables ---------------------------------------------------
+
+$phi-short: 38.2;
+$phi-long: 61.8;
+
+$left-width: 42 * 1vw;
+$middle-width: $left-width;
+$right-width: -app-right-width($left-width, $middle-width);
+
+$toprow-height: 9vh;
+$home-width: 10vw;
+$name-width: $left-width;
+$hamburger-width: $right-width;
+$race-class-width: 100vw - $home-width
+                         - $name-width
+                         - $hamburger-width;
+
+$abilities-height: $phi-long * 1vh;
+$prof-lang-height: 100vh - $toprow-height
+                         - $abilities-height;
+$combat-stats-height: 43vh;
+$atk-spell-height: $abilities-height - $combat-stats-height;
+$inventory-height: 100vh - $toprow-height
+                         - $combat-stats-height
+                         - $atk-spell-height;
+
+$right-section-height: (100vh - $toprow-height) / 4;
+$appearance-height: $right-section-height;
+$personality-height: $right-section-height;
+$story-social-height: $right-section-height;
+$features-traits-height: $right-section-height;
+
+
+
+// Bootstrap overrides *********************************************
+
+.container-fluid {
+    padding: 0;
+}
+.row {
+    margin: 0;
+}
+
+
+
+// Layout **********************************************************
+
 body {
+    overflow: hidden; //disable scrollbars
+}
+
+#toprow {
+    height: $toprow-height;
+    line-height: $toprow-height;
+    /* --- flexbox --- */
+    justify-content: space-between;
+    /* --- end flexbox --- */
+    
+    > .col- {
+
+    }
+    > .col-:nth-of-type(1) {
+        width: $home-width;
+    }
+    > .col-:nth-of-type(2) {
+        width: $name-width;
+    }
+    > .col-:nth-of-type(3) {
+        width: $race-class-width;
+    }
+    > .col-:nth-of-type(4) {
+        width: $hamburger-width;
+    }
+}
+
+#mainrow {
+    
+    .left {
+        width: $left-width;
+
+        #abilities-section {
+            height: $abilities-height;
+            
+            @extend %vertical-flexies;   
+        }
+        
+        #prof-lang-section {
+            height: $prof-lang-height;
+
+            @extend %vertical-flexies;
+        }
+    }
+    .middle {
+        width: $middle-width;
+
+        #combat-stats-section {
+            height: $combat-stats-height;
+            
+            @extend %vertical-flexies;
+        }
+    
+        #attacks-spellcasting-section {
+            height: $atk-spell-height;
+
+            @extend %vertical-flexies;
+        }
+        
+        #inventory-section {
+            height: $inventory-height;
+
+            @extend %vertical-flexies;
+        }
+
+
+
+    }
+    .right {
+        width: $right-width;
+        
+        #appearance-section {
+            height: $appearance-height;
+
+            @extend %vertical-flexies;
+        }
+        #personality-section {
+            height: $personality-height;
+
+            @extend %vertical-flexies;
+        }
+        #story-social-section {
+            height: $story-social-height;
+
+            @extend %vertical-flexies;
+        }
+        #features-traits-section {
+            height: $features-traits-height;
+
+            @extend %vertical-flexies;
+        }
+    }
+}
+
+
+
+// Styling **********************************************************
+
+html {
+    font-size: 1rem;
+}
+body {
+    // @include font-px-to-em(16);
     background-color: turquoise;
-    color: rgb(250, 250, 250);
+    color: rgb(252, 252, 252);
+}
+
+
+#toprow {
+    // padding: 2vh 0px;
+    
+    > div {
+        
+    }
+}
+
+
+#mainrow {
+    .left {
+        
+        #abilities-section {
+            padding: 1vh 2vw;
+            
+            .row {
+                color: orangered;
+            }
+        }
+        #prof-lang-section {
+            padding: 1vh 2vw;
+
+        }
+    }
+    .middle {
+
+    }
+    .right {
+        
+    }
 }

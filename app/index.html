@@ -11,26 +11,29 @@
 <body>
 <div class="container-fluid">
 
-    <div class="row">5e Character Sheet</div>
-    <div class="row" id="topbar">
-        <div class="col-" id="home">
-            HOME
+    <div id="toprow" class="row">
+        <div id="home" class="col-">
+            H
         </div>
-        <div class="col-" id="name">
-            <h1>Name</h1>
+        <div id="name" class="col-">
+            Name
         </div>
-        <div class="col-" id="race-class">
+        <div id="race-class" class="col-">
             Race/Class
         </div>
-        <div class="col-" id="hamburger">
-            hamburger
+        <div id="hamburger" class="col-">
+            ham
         </div>
     </div>
     <!-- /#topbar.row-->
-    <div class="row">
-        <div class="col-">Left
-            <div class="row">
-                <div class="row">Str</div>
+    <div id="mainrow" class="row">
+        <div class="left col-">
+            <div class="row" id="abilities-section">
+                <div class="row">
+                    <div>
+                        Str 16 +3
+                    </div>
+                </div>
                 <div class="row">Dex</div>
                 <div class="row">Con</div>
                 <div class="row">Int</div>
@@ -43,39 +46,39 @@
                 <div class="row">Skills</div>
                 <div class="row">Passive Perc.</div>
             </div>
-            <div class="row">
+            <div class="row" id="prof-lang-section">
                 <div class="row">Proficiencies</div>
                 <div class="row">Languages: Common, Elven, Dwarven</div>
             </div>
         </div>
-        <!-- /left .col- -->
-        <div class="col-">Middle
-            <div class="row">
-                <div class="row">12/24 <3</div>
+        <!-- /.left .col- -->
+        <div class="middle col-">
+            <div id="combat-stats-section" class="row">
+                <div class="row">12/24</div>
                 <div class="row">AC 14</div>
                 <div class="row">Init +3</div>
                 <div class="row">Speed 30</div>
                 <div class="row">HD || skull</div>
             </div>
-            <div class="row">
+            <div id="attacks-spellcasting-section" class="row">
                 <div class="row">Attacks</div>
                 <div class="row">Spellcasting</div>
             </div>
-            <div class="row">
+            <div id="inventory-section" class="row">
                 <div class="row">GP: 200.1</div>
                 <div class="row">Equipment & Treasure</div>
             </div>
         </div>
-        <!-- /middle .col- -->
-        <div class="col-">Right
-            <div class="row">Appearance/Pic</div>
-            <div class="row">Personality</div>
-            <div class="row">Story & Social</div>
-            <div class="row">F & T</div>
+        <!-- /.middle .col- -->
+        <div class="right col-">
+            <div id="appearance-section" class="row">Appearance/Pic</div>
+            <div id="personality-section" class="row">Personality</div>
+            <div id="story-social-section" class="row">Story & Social</div>
+            <div id="features-traits-section" class="row">F & T</div>
         </div>
-        <!-- /right .col- -->
+        <!-- /.right .col- -->
     </div>
-    <!-- /.row -->
+    <!-- /#mainrow.row -->
 
 </div>
 <!-- /.container-fluid -->

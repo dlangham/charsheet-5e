@@ -1,5 +1,81 @@
+.limn, .container-fluid > .row,
+.container-fluid .col-,
+.container-fluid > .row .col- > .row {
+  outline: 1px dotted #f8e4ae; }
+
+#mainrow .left #abilities-section, #mainrow .left #prof-lang-section, #mainrow .middle #combat-stats-section, #mainrow .middle #attacks-spellcasting-section, #mainrow .middle #inventory-section, #mainrow .right #appearance-section, #mainrow .right #personality-section, #mainrow .right #story-social-section, #mainrow .right #features-traits-section {
+  /* --- flexbox --- */
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* --- end flexbox --- */ }
+  #mainrow .left #abilities-section .row, #mainrow .left #prof-lang-section .row, #mainrow .middle #combat-stats-section .row, #mainrow .middle #attacks-spellcasting-section .row, #mainrow .middle #inventory-section .row, #mainrow .right #appearance-section .row, #mainrow .right #personality-section .row, #mainrow .right #story-social-section .row, #mainrow .right #features-traits-section .row {
+    flex-grow: 1;
+    align-items: center; }
+
+.container-fluid {
+  padding: 0; }
+
+.row {
+  margin: 0; }
+
+body {
+  overflow: hidden; }
+
+#toprow {
+  height: 9vh;
+  line-height: 9vh;
+  /* --- flexbox --- */
+  justify-content: space-between;
+  /* --- end flexbox --- */ }
+  #toprow > .col-:nth-of-type(1) {
+    width: 10vw; }
+  #toprow > .col-:nth-of-type(2) {
+    width: 42vw; }
+  #toprow > .col-:nth-of-type(3) {
+    width: 32vw; }
+  #toprow > .col-:nth-of-type(4) {
+    width: 16vw; }
+
+#mainrow .left {
+  width: 42vw; }
+  #mainrow .left #abilities-section {
+    height: 61.8vh; }
+  #mainrow .left #prof-lang-section {
+    height: 29.2vh; }
+
+#mainrow .middle {
+  width: 42vw; }
+  #mainrow .middle #combat-stats-section {
+    height: 43vh; }
+  #mainrow .middle #attacks-spellcasting-section {
+    height: 18.8vh; }
+  #mainrow .middle #inventory-section {
+    height: 29.2vh; }
+
+#mainrow .right {
+  width: 16vw; }
+  #mainrow .right #appearance-section {
+    height: 22.75vh; }
+  #mainrow .right #personality-section {
+    height: 22.75vh; }
+  #mainrow .right #story-social-section {
+    height: 22.75vh; }
+  #mainrow .right #features-traits-section {
+    height: 22.75vh; }
+
+html {
+  font-size: 1rem; }
+
 body {
   background-color: turquoise;
-  color: #fafafa; }
+  color: #fcfcfc; }
+
+#mainrow .left #abilities-section {
+  padding: 1vh 2vw; }
+  #mainrow .left #abilities-section .row {
+    color: orangered; }
+
+#mainrow .left #prof-lang-section {
+  padding: 1vh 2vw; }
 
 /*# sourceMappingURL=style.css.map */
