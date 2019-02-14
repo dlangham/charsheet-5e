@@ -67,15 +67,9 @@ html {
   font-size: 1rem; }
 
 body {
-  background-color: turquoise;
-  color: #fcfcfc; }
+  font-family: Georgia, serif; }
 
-#mainrow .left #abilities-section {
-  padding: 1vh 2vw; }
-  #mainrow .left #abilities-section .row {
-    color: orangered; }
-
-#mainrow .left #prof-lang-section {
-  padding: 1vh 2vw; }
+#mainrow .left #abilities-section .row {
+  color: orangered; }
 
 /*# sourceMappingURL=style.css.map */

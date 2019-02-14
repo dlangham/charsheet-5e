@@ -3,4 +3,5 @@
 * Dynamic character sheet
 * Mobile-first design
 * SPA
-* Built on Bootstrap and jQuery
+* RESTful
+* Built on Node, Express, MySQL

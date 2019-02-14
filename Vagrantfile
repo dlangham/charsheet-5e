@@ -24,6 +24,7 @@ Vagrant.configure("2") do |config|
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
   config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -64,11 +65,11 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   # config.vm.provision "shell", inline: <<-SHELL
-  config.vm.provision :shell, path: "vm_provision.sh"
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
-  #
+  config.vm.provision :shell, path: "vm_provision.sh"
+  
   # Speed up VM performance dramatically via rsync.
   config.vm.synced_folder "./app/", "/var/www/html", type: "rsync", rsync__exclude: ".git/", rsync__args: ["--verbose", "--archive", "--delete", "-z"]
 end

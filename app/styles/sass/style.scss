@@ -206,8 +206,9 @@ html {
 }
 body {
     // @include font-px-to-em(16);
-    background-color: turquoise;
-    color: rgb(252, 252, 252);
+    // background-color: turquoise;
+    // color: rgb(252, 252, 252);
+    font-family: Georgia, serif;
 }
 
 
@@ -224,14 +225,14 @@ body {
     .left {
         
         #abilities-section {
-            padding: 1vh 2vw;
+            // padding: 1vh 2vw;
             
             .row {
                 color: orangered;
             }
         }
         #prof-lang-section {
-            padding: 1vh 2vw;
+            // padding: 1vh 2vw;
 
         }
     }
