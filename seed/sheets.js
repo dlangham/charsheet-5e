@@ -1,10 +1,11 @@
 //seed data: character sheets
+//mysql table: sheets
 //mimics MySQL RowDataPacket
 
-let rows = [
+let sheets = [
     {
-        id: 1,
-        userid: null,
+        id: 6,
+        userid: 357,
         charname: 'Bobby Newport',
         race: 'Human',
         class: 'Rogue',
@@ -12,17 +13,17 @@ let rows = [
         background: 'Charlatan',
         alignment: 'Lawful Neutral',
         xp: 150,
-        strength: 10,
+        strength: 11,
         dexterity: 12,
         constitution: 14,
-        intelligence: 8,
-        wisdom: 12,
+        intelligence: -1,
+        wisdom: 7,
         charisma: 18,
-        inspiration: 1
+        inspiration: 0
     },
     {
-        id: 2,
-        userid: null,
+        id: 42,
+        userid: 246,
         charname: 'Winston Wombat',
         race: 'Halfling',
         class: 'Fighter',
@@ -36,8 +37,8 @@ let rows = [
         intelligence: 10,
         wisdom: 12,
         charisma: 12,
-        inspiration: 0
+        inspiration: 1
     }
 ];
 
-module.exports = rows;
+module.exports = sheets;

@@ -9,10 +9,14 @@ const
 
 const port      = 3000;
 
-// Database & Server /////////////////////////////////////////////////
 
-// database connection ***********************************
-const rows = require('./seed-sheets.js'); // Sheets table, seed test data
+
+// Database Connection /////////////////////////////////////////////////
+
+// seed test data
+const sheet_profs = require('./seed/sheet_profs.js');
+const sheets = require('./seed/sheets.js');
+const srd5_profs = require('./seed/srd5_profs.js');
 
 /*
 const db = mysql.createConnection({
@@ -28,7 +32,8 @@ db.connect((err) => {
 });
 */
 
-// Middleware Config ///////////////////////////////////////////////////
+
+// Middleware Config //////////////////////////////////////////////
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'app/views/'));
@@ -36,9 +41,15 @@ app.use(express.static(path.join(__dirname, 'app/')));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-const abilityMod = require('./app/logic/abilityMod.js');
+// Logic //////////////////////////////////////////////////////////
 
-// sql *****************************************************
+const
+    abilityMod = require('./app/logic/abilityMod.js'),
+    profBonus = require('./app/logic/proficiencyBonus.js'),
+    profList = require('./app/logic/profList.js');
+
+
+// sql ///////////////////////////////////////////////////////////
 
 const sqlQuery = (sql, req, res) => {
     db.query(sql, (err, rows, cols) => {
@@ -64,51 +75,58 @@ app.get('/sql', (req, res) => {
 // Route Handlers //////////////////////////////////////////////////////
 
 app.get('/', (req, res) => {
-/*
+
+    let sheetid = 6;   // choose sheet id number
+    // let sheetid = 42;   // choose sheet id number
+
+    // get sheet from seed
+    var index = sheets.findIndex((sheet) => {
+        return sheet.id === sheetid;
+    });
+    let sheet = sheets[index];
+
+    /*
+    // get sheet from mysql
+
     // const sql = `SELECT * FROM sheets;`;
-    const sql = `SELECT * FROM sheets WHERE id=1;`;
-    // const sql = `SELECT charname FROM sheets WHERE id=1;`;
+    const sql = `SELECT * FROM sheets WHERE id=${sheetid};`;
+    // const sql = `SELECT charname FROM sheets WHERE id=${sheetid};`;
 
-
-    db.query(sql, (err, rows, cols) => {
+    const sheets = db.query(sql, (err, sheets) => {
         if (err) {
             console.log(err);
             res.sendStatus(500);
             return; 
         }
+        return sheets;
+    )};
 */
-        let sheet = rows[1];
 
-    //destructured from database
-        let {
-            charname: charName, class: classes,
-            race, level, background, alignment, xp,
-            strength, dexterity, constitution,
-            intelligence, wisdom, charisma,
-            inspiration
-        } = sheet;
+    //`sheet` destructured from database
+    let {
+        id, charname: charName, class: classes,
+        race, level, background, alignment, xp,
+        strength, dexterity, constitution,
+        intelligence, wisdom, charisma,
+        inspiration
+    } = sheet;
+        
 
-    //this was refactored into destructering; see above
-        // let charName    = sheet['charname'],
-        //     race        = sheet['race'],
-        //     classes     = sheet['class'],
-        //     level       = sheet['level'],
-        //     background  = sheet['background'],
-        //     alignment   = sheet['alignment'],
-        //     xp          = sheet['race'];
+    // render the view, include logic and data
+    res.render('index.ejs', {
 
-        res.render('index.ejs', {
-            //function
-            abilityMod,
+        //logic
+        abilityMod, profBonus, profList,
 
-            //variables
-            charName, race, classes, level,
-            background, alignment, xp,
-            strength, dexterity, constitution,
-            intelligence, wisdom, charisma,
-            inspiration
-        });
-    // });
+        //data
+        id, charName, race, classes, level,
+        background, alignment, xp,
+        strength, dexterity, constitution,
+        intelligence, wisdom, charisma,
+        inspiration
+
+    });
+
 });
 
 // RESTful route handlers *********************************

@@ -38,18 +38,17 @@
             <div class="row" id="abilities-section">
                 <div class="row">
                     <div>
-                        Str <%= `${strength} ${abilityMod.showMod(strength)}` %>
+                        Str <%= `${strength} ${abilityMod.show(strength)}` %>
                     </div>
                 </div>
-                <div class="row">Dex <%= dexterity %> <%= abilityMod.showMod(dexterity) %></div>
-                <div class="row">Con <%= constitution %> <%= abilityMod.showMod(constitution) %></div>
-                <div class="row">Int <%= intelligence %> <%= abilityMod.showMod(intelligence) %></div>
-                <div class="row">Wis <%= wisdom %> <%= abilityMod.showMod(wisdom) %></div>
-                <div class="row">Cha <%= charisma %> <%= abilityMod.showMod(charisma) %></div>
+                <div class="row">Dex <%= dexterity %> <%= abilityMod.show(dexterity) %></div>
+                <div class="row">Con <%= constitution %> <%= abilityMod.show(constitution) %></div>
+                <div class="row">Int <%= intelligence %> <%= abilityMod.show(intelligence) %></div>
+                <div class="row">Wis <%= wisdom %> <%= abilityMod.show(wisdom) %></div>
+                <div class="row">Cha <%= charisma %> <%= abilityMod.show(charisma) %></div>
                 <div class="row">~~~</div>
-                <div class="row">Prof. Bonus</div>
-                <div class="row">Inspiration [ <% 
-                    if (inspiration) { %>
+                <div class="row">Prof. Bonus <%= profBonus.show(level) %></div>
+                <div class="row">Inspiration [ <% if (inspiration) { %>
                         X
                     <% } %> ]</div>
                 <div class="row">Saving Throws</div>
@@ -57,7 +56,7 @@
                 <div class="row">Passive Perc.</div>
             </div>
             <div class="row" id="prof-lang-section">
-                <div class="row">Proficiencies</div>
+                <div class="row">Proficiencies: <%= profList.show(id) %></div>
                 <div class="row">Languages: Common, Elven, Dwarven</div>
             </div>
         </div>

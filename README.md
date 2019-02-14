@@ -1,4 +1,4 @@
-# D&D 5e Character Sheet
+# 5e Character Sheet
 
 * Dynamic character sheet
 * Mobile-first design

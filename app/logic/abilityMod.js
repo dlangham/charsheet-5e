@@ -1,3 +1,4 @@
+const showBonus = require('./showBonus.js');
 
 const abilityMod = {};
 
@@ -5,7 +6,6 @@ const abilityMod = {};
 abilityMod.validateScore = function(ability) {
 
     if (ability < 0) {
-        console.log('validateScore returned 0');
         return 0;
     } 
 
@@ -16,35 +16,21 @@ abilityMod.validateScore = function(ability) {
 }
 
 // get ability modifier based on ability score
-abilityMod.getMod = function(ability) {
+abilityMod.get = function(ability) {
 
     ability = this.validateScore(ability);
     
     return Math.round((ability - 10.5) / 2);
 }
 
-
-// prepare modifier for view
-abilityMod.showMod = function(ability) {
+// process modifier for view
+abilityMod.show = function(ability) {
 
     //get mod number
-    let mod = this.getMod(ability);
+    let mod = this.get(ability);
 
-    //convert to string, and if needed use "+" or "--"
-    if (mod > 0) {
-        mod = `+${ mod.toString() }`;
-        return mod;
-    }
-    
-    else if (mod === 0) {
-        mod = `--`;
-        return mod;
-    }
-    
-    else {
-        mod = mod.toString();
-        return mod;
-    }
+    //prepare modifier for view
+    return showBonus.show(mod);
 
 }
 
