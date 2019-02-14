@@ -1,20 +1,20 @@
 'use strict';
 
+// app setup
 const
     express       = require('express'),
+    app           = express(),
     mysql         = require('mysql'),
-    path          = require('path'),
-    querystring   = require('querystring');
-      
+    path          = require('path');
+
 const port      = 3000;
-
-// express server instance *******************************
-const app = express();
-
 
 // Database & Server /////////////////////////////////////////////////
 
 // database connection ***********************************
+const rows = require('./seed-sheets.js'); // Sheets table, seed test data
+
+/*
 const db = mysql.createConnection({
     host     : 'localhost',   
     user     : 'user',
@@ -26,6 +26,7 @@ db.connect((err) => {
     if (err) { console.log(err); return; }
     console.log(`MySQL connected! id ${db.threadId}, user "${db.config.user}", database "${db.config.database}"`);
 });
+*/
 
 // Middleware Config ///////////////////////////////////////////////////
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'app/')));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
+const abilityMod = require('./app/logic/abilityMod.js');
 
 // sql *****************************************************
 
@@ -62,8 +64,11 @@ app.get('/sql', (req, res) => {
 // Route Handlers //////////////////////////////////////////////////////
 
 app.get('/', (req, res) => {
-    const sql = `SELECT * FROM sheets WHERE id=1;`;
+/*
     // const sql = `SELECT * FROM sheets;`;
+    const sql = `SELECT * FROM sheets WHERE id=1;`;
+    // const sql = `SELECT charname FROM sheets WHERE id=1;`;
+
 
     db.query(sql, (err, rows, cols) => {
         if (err) {
@@ -71,26 +76,39 @@ app.get('/', (req, res) => {
             res.sendStatus(500);
             return; 
         }
+*/
+        let sheet = rows[1];
 
-        let sheet = rows[0];
+    //destructured from database
+        let {
+            charname: charName, class: classes,
+            race, level, background, alignment, xp,
+            strength, dexterity, constitution,
+            intelligence, wisdom, charisma,
+            inspiration
+        } = sheet;
 
-        let charName    = sheet['charname'],
-            race        = sheet['race'],
-            classes     = sheet['class'],
-            level       = sheet['level'],
-            background  = sheet['background'],
-            alignment   = sheet['alignment'],
-            xp          = sheet['race'];
+    //this was refactored into destructering; see above
+        // let charName    = sheet['charname'],
+        //     race        = sheet['race'],
+        //     classes     = sheet['class'],
+        //     level       = sheet['level'],
+        //     background  = sheet['background'],
+        //     alignment   = sheet['alignment'],
+        //     xp          = sheet['race'];
 
-        res.render('index.ejs', {charName, race, classes, level, background, alignment, xp});
-    });
+        res.render('index.ejs', {
+            //function
+            abilityMod,
 
-    // let rows = sendSql(thesql, req, res); //sql query
-    // let charName = rows['charname']; //assign data to variables
-    // res.render('index.ejs', {charName}); //render page, with variables
-
-    // const charName = sendSql(`SELECT charname FROM sheets WHERE id=1;`, req, res);
-
+            //variables
+            charName, race, classes, level,
+            background, alignment, xp,
+            strength, dexterity, constitution,
+            intelligence, wisdom, charisma,
+            inspiration
+        });
+    // });
 });
 
 // RESTful route handlers *********************************
